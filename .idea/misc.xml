@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1475" />
+        <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/bg_rounded_bottom.xml" value="0.1445" />
+        <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/bg_rounded_trans.xml" value="0.1445" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1475" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1475" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1475" />
+        <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/ic_location.xml" value="0.1445" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1475" />
-        <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/layout/activity_dangerous.xml" value="0.1265625" />
+        <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/layout/activity_dangerous.xml" value="0.27447916666666666" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/layout/fragment_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Projects/AndroidStudioProjects/Respawn/chapter5topic2/app/src/main/res/layout/fragment_notifications.xml" value="0.27447916666666666" />

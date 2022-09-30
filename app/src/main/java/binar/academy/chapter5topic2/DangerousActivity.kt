@@ -1,6 +1,7 @@
 package binar.academy.chapter5topic2
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
@@ -14,70 +15,72 @@ import java.util.*
 
 class DangerousActivity : AppCompatActivity() {
 
-    val REQUEST_CODE = 445
+    private val requestCode = 445
 
-    lateinit var tvStatusIzin : TextView
-    lateinit var btnMain : Button
+    private lateinit var currentStatus : TextView
+    private lateinit var btnAccess : Button
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dangerous)
 
-        tvStatusIzin = findViewById(R.id.main_tv_status)
+        currentStatus = findViewById(R.id.tvStatusLocation)
 
-        btnMain = findViewById(R.id.main_btn_call)
-        btnMain.setOnClickListener {
-            if (izinLokasi()){
-                Toast.makeText(this, "Izin sudah diberikan", Toast.LENGTH_SHORT).show()
-                tvStatusIzin.text =  "Izin sudah diberikan"
-            }else{
-                tvStatusIzin.text =  "Meminta izin akses lokasi"
+        btnAccess = findViewById(R.id.btnRequest)
+        btnAccess.setOnClickListener {
+            if (!izinLokasi()) {
+                currentStatus.text =  "Mencoba mengakses lokasi"
+            } else {
+                Toast.makeText(this, "Telah diberikan izin", Toast.LENGTH_SHORT).show()
+                currentStatus.text =  "Telah diberikan izin"
             }
         }
 
-        if (izinLokasi()){
-            tvStatusIzin.text =  "Izin sudah diberikan"
-            btnMain.visibility = View.GONE
+        when {
+            !izinLokasi() -> return
+            else -> {
+                currentStatus.text = "Telah diberikan izin"
+                btnAccess.visibility = View.GONE
+            }
         }
     }
 
 
-    fun izinLokasi(): Boolean {
+    private fun izinLokasi(): Boolean {
 
-        val r_lokasi = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-        val r_lokasi_coarse = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        val locationFine = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        val locationCoarse = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
 
 
         val listPermissionsNeed = ArrayList<String>()
 
-        if (r_lokasi != PackageManager.PERMISSION_GRANTED) {
+        if (locationFine != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeed.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
-        if (r_lokasi_coarse != PackageManager.PERMISSION_GRANTED) {
+        if (locationCoarse != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeed.add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
 
-        if (!listPermissionsNeed.isEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeed.toTypedArray(), REQUEST_CODE)
+        if (listPermissionsNeed.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeed.toTypedArray(), requestCode)
             return false
         }
 
         return true
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == REQUEST_CODE){
-            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Izin diberikan", Toast.LENGTH_SHORT).show()
+        if (requestCode != this.requestCode) return
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Tracking Location Success !", Toast.LENGTH_SHORT).show()
 
-                tvStatusIzin.text =  "Izin diberikan"
-                btnMain.visibility = View.GONE
-            }else{
-                tvStatusIzin.text =  "Izin tidak diberikan"
-            }
-        }
+            currentStatus.text =  "Diizinkan untuk akses GPS"
+            btnAccess.visibility = View.GONE
+        } else currentStatus.text =  "Tak ada izin untuk akses GPS"
     }
 }
